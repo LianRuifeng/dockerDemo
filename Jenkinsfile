@@ -15,10 +15,10 @@
                 }
             }
         }
-        stage('Test') {
-            echo "2.Test Stage"
-            sh "mvn test"
-        }
+        //stage('Test') {
+        //    echo "2.Test Stage"
+        //   sh "mvn test"
+        //}
         stage('Build') {
             echo "3.Build Docker Image Stage"
             sh "mvn package  -Dmaven.test.skip=true"
