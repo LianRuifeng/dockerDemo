@@ -27,8 +27,9 @@
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
             //sh "mvn deploy -Dmaven.test.skip=true"
-            sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
+            //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
             sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            docker run -it -d -p 8888:8004 --name dockerdemo ${docker_img_name}:${build_tag} ${docker_img_name}
             //withCredentials([usernamePassword(credentialsId: 'docker-register', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
             //    sh "docker login -u ${dockerUser} -p ${dockerPassword} docker.ryan-miao.com"
             //    sh "docker push ${docker_img_name}:latest"
