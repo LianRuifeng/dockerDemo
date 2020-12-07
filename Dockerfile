@@ -1,7 +1,7 @@
 # 该镜像需要依赖的基础镜像
 FROM java:8
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
+MAINTAINER lian
+COPY dockerdemo-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8004
 ENTRYPOINT ["java","-jar","/app.jar"]
 
