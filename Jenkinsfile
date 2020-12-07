@@ -29,12 +29,12 @@
             //sh "mvn deploy -Dmaven.test.skip=true"
             sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
             sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
-            /*withCredentials([usernamePassword(credentialsId: 'docker-register', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-                sh "docker login -u ${dockerUser} -p ${dockerPassword} docker.ryan-miao.com"
-                sh "docker push ${docker_img_name}:latest"
-                sh "docker push ${docker_img_name}:${pom.version}"
-                sh "docker push ${docker_img_name}:${build_tag}"
-            }*/
+            //withCredentials([usernamePassword(credentialsId: 'docker-register', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
+            //    sh "docker login -u ${dockerUser} -p ${dockerPassword} docker.ryan-miao.com"
+            //    sh "docker push ${docker_img_name}:latest"
+            //    sh "docker push ${docker_img_name}:${pom.version}"
+            //    sh "docker push ${docker_img_name}:${build_tag}"
+           // }*/
         }
         //stash 'complete-build'
     }
@@ -44,11 +44,11 @@
         }
     }
    /* node('slave001'){
-        stage('Deploy') {
-            //unstash 'complete-build'
-            echo "5. Deploy Stage"
-            sh "sed -i 's/<IMG_NAME>/${img_name}:${build_tag}/' location/k8s.yaml"
-            sh "sed -i 's/<BRANCH_NAME>/${env.BRANCH_NAME}/' location/k8s.yaml"
-            sh "/data/opt/kubernetes/client/bin/kubectl apply -f ${WORKSPACE}/location/k8s.yaml --record"
-        }
-    }*/
+   //     stage('Deploy') {
+   //         //unstash 'complete-build'
+   ///         echo "5. Deploy Stage"
+    //        sh "sed -i 's/<IMG_NAME>/${img_name}:${build_tag}/' location/k8s.yaml"
+   //         sh "sed -i 's/<BRANCH_NAME>/${env.BRANCH_NAME}/' location/k8s.yaml"
+   //         sh "/data/opt/kubernetes/client/bin/kubectl apply -f ${WORKSPACE}/location/k8s.yaml --record"
+   //     }
+    //}*/
