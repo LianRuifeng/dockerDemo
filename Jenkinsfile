@@ -43,7 +43,7 @@
             input '确认要部署线上环境吗？'
         }
     }
-    node('slave001'){
+   /* node('slave001'){
         stage('Deploy') {
             //unstash 'complete-build'
             echo "5. Deploy Stage"
@@ -51,4 +51,4 @@
             sh "sed -i 's/<BRANCH_NAME>/${env.BRANCH_NAME}/' location/k8s.yaml"
             sh "/data/opt/kubernetes/client/bin/kubectl apply -f ${WORKSPACE}/location/k8s.yaml --record"
         }
-    }
+    }*/
