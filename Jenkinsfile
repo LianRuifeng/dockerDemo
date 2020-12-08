@@ -27,7 +27,7 @@
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
             sh "mvn deploy -Dmaven.test.skip=true"
-            
+            sh "docker login --username='lrf' --password='ab123456789'"
             //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
