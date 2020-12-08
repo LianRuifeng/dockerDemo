@@ -56,15 +56,16 @@
                       <artifactId>docker-maven-plugin</artifactId>
                       <version>0.4.11</version>
                       <configuration>
-                          <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                          <imageTags>
-                              <imageTag>${project.version}</imageTag>
-                              <imageTag>latest</imageTag>
-                          </imageTags>
+                          <imageName>dockerdemo</imageName>
+                          <baseImage>java</baseImage>
+                          <maintainer>925995041@qq.com</maintainer>
+                          <workdir>/ROOT</workdir>
+                          <cmd>["java", "-version"]</cmd>
+                          <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
                           <dockerDirectory>${project.basedir}</dockerDirectory>
                           <resources>
                               <resource>
-                                  <targetPath>/</targetPath>
+                                  <targetPath>/ROOT</targetPath>
                                   <directory>${project.build.directory}</directory>
                                   <include>${project.build.finalName}.jar</include>
                               </resource>
