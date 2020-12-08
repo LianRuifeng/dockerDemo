@@ -21,8 +21,8 @@
         //}
         stage('Build') {
             echo "3.Build Docker Image Stage"
-            //sh "mvn package  -Dmaven.test.skip=true"
-            sh "mvn clean package docker:build lrf/dockerdemo:latest -Dmaven.test.skip=true"
+            sh "mvn package  -Dmaven.test.skip=true"
+            sh "docker:build lrf/dockerdemo:latest"
         }
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
