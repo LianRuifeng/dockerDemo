@@ -3,7 +3,7 @@
             echo "1.Prepare Stage"
             checkout scm
             pom = readMavenPom file: 'pom.xml'
-            docker_host = "docker.ryan-miao.com"
+            docker_host = ""
             img_name = "${pom.groupId}-${pom.artifactId}"
             docker_img_name = "${docker_host}/${img_name}"
             echo "group: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
