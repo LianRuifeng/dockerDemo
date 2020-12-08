@@ -22,6 +22,7 @@
         stage('Build') {
             echo "3.Build Docker Image Stage"
             sh "mvn package  -Dmaven.test.skip=true"
+            sh "docker login --username='lrf' --password='ab123456789'"
             sh "mvn docker:build -DpushImage"
         }
         stage('Push') {
