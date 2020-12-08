@@ -63,6 +63,9 @@
                           <cmd>["java", "-version"]</cmd>
                           <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
                           <dockerDirectory>${project.basedir}</dockerDirectory>
+                          <serverId>docker-registry</serverId>
+                          <registryUrl>http://192.168.137.105:5000/</registryUrl>
+                          <dockerCertPath>${project.basedir}</dockerCertPath>
                           <resources>
                               <resource>
                                   <targetPath>/ROOT</targetPath>
