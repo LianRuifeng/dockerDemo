@@ -22,13 +22,13 @@
         stage('Build') {
             echo "3.Build Docker Image Stage"
             sh "mvn package  -Dmaven.test.skip=true"
-            sh "docker login --username='lrf1990' --password='ab123456789'"
+            //sh "docker login --username='lrf1990' --password='ab123456789'"
             sh "mvn docker:build -DpushImage"
         }
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
             sh "mvn deploy -Dmaven.test.skip=true"
-            sh "docker login --username='lrf1990' --password='ab123456789'"
+            //sh "docker login --username='lrf1990' --password='ab123456789'"
             //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
