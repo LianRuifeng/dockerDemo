@@ -28,7 +28,7 @@
             echo "4.Deploy jar and Push Docker Image Stage"
             //sh "mvn deploy -Dmaven.test.skip=true"
             
-            echo "${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
