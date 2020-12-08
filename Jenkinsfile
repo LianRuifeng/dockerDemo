@@ -30,7 +30,7 @@
             
             echo "${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
-            sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
             //withCredentials([usernamePassword(credentialsId: 'docker-register', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
             //    sh "docker login -u ${dockerUser} -p ${dockerPassword} docker.ryan-miao.com"
