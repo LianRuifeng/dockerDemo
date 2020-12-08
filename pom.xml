@@ -58,6 +58,7 @@
                       <configuration>
                           <imageName>dockerdemo</imageName>
                           <baseImage>java</baseImage>
+                          <dockerHost>http://192.168.137.105:2375</dockerHost>
                           <maintainer>925995041@qq.com</maintainer>
                           <workdir>/ROOT</workdir>
                           <cmd>["java", "-version"]</cmd>
