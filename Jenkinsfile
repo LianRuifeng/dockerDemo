@@ -22,15 +22,16 @@
         stage('Build') {
             echo "3.Build Docker Image Stage"
             //sh "mvn package  -Dmaven.test.skip=true"
-            sh "mvn clean package docker:build -Dmaven.test.skip=true"
+            sh "mvn clean package docker:build lrf/dockerdemo:latest -Dmaven.test.skip=true"
         }
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
             sh "mvn deploy -Dmaven.test.skip=true"
             
-            echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
-            sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
-            sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
+            //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
+            sh "docker push lrf/dockerdemo:latest"
             sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
             //withCredentials([usernamePassword(credentialsId: 'docker-register', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
             //    sh "docker login -u ${dockerUser} -p ${dockerPassword} docker.ryan-miao.com"
