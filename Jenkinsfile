@@ -6,7 +6,7 @@
             checkout scm
             pom = readMavenPom file: 'pom.xml'
             docker_host = "lrf"
-            img_name = "${pom.groupId}-${pom.artifactId}"
+            img_name = "${docker_host}/${pom.artifactId}"
             docker_img_name = "${docker_host}/${img_name}"
 			//镜像的版本号
 			tag = "latest"
@@ -36,13 +36,13 @@
             //sh "mvn deploy -Dmaven.test.skip=true"
             //sh "docker login --username='admin' --password='admin'"
             //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
-            sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
+            sh "docker tag ${img_name} ${img_name}:latest"
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker push lrf/dockerdemo:latest"
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
             withCredentials([usernamePassword(credentialsId: 'nexusCard', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                 sh "docker login -u ${dockerUser} -p ${dockerPassword} ${harbor_url}"
-                sh "docker push ${docker_img_name}:latest"
+                sh "docker push ${img_name}:latest"
                 //sh "docker push ${docker_img_name}:${pom.version}"
                 //sh "docker push ${docker_img_name}:${build_tag}"
             }
