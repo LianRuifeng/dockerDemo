@@ -1,12 +1,13 @@
 # 该镜像需要依赖的基础镜像
 FROM java:8
+VOLUME /tmp
+ARG JAR_FILE
 MAINTAINER 925995041@qq.com
 #WORKDIR /ROOT
-COPY dockerdemo-0.0.1-SNAPSHOT.jar app.jar
+COPY ${JAR_FILE} app.jar
 CMD ["java", "-version"]
 EXPOSE 8004
-ENTRYPOINT ["java", "-jar", "${project.build.finalName}.jar"]
-
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 ## 该镜像需要依赖的基础镜像
 #FROM java:8
