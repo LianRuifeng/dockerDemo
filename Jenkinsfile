@@ -14,12 +14,12 @@
 			nexus_url = "192.168.137.159:8081/repository/docker-hosted-repository/"
             echo "group: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
             echo "docker-img-name: ${docker_img_name}"
-            script {
-                build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != null) {
-                    build_tag = "${env.BRANCH_NAME}-${build_tag}"
-                }
-            }
+            //script {
+            //    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+            //    if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != null) {
+            //        build_tag = "${env.BRANCH_NAME}-${build_tag}"
+            //    }
+            //}
         }
         //stage('Test') {
         //    echo "2.Test Stage"
@@ -41,7 +41,7 @@
             //sh "docker push lrf/dockerdemo:latest"
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
             withCredentials([usernamePassword(credentialsId: 'nexusCard', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-                sh "docker login -u ${dockerUser} -p ${dockerPassword} ${harbor_url}"
+                sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
                 sh "docker push ${img_name}:latest"
                 //sh "docker push ${docker_img_name}:${pom.version}"
                 //sh "docker push ${docker_img_name}:${build_tag}"
