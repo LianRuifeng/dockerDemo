@@ -51,52 +51,17 @@
                       <groupId>org.springframework.boot</groupId>
                       <artifactId>spring-boot-maven-plugin</artifactId>
                  </plugin>
-                 <!--
                  <plugin>
-                    <groupId>com.spotify</groupId>
-                    <artifactId>dockerfile-maven-plugin</artifactId>
-                    <version>1.3.7</version>
-                  </plugin>
-                  -->
-                 <!-- 
-                 <plugin>
-                      <groupId>com.spotify</groupId>
-                      <artifactId>docker-maven-plugin</artifactId>
-                      <version>1.3.7</version>
-                      <configuration>
-                          <imageName>dockerdemo</imageName>
-                          <baseImage>java</baseImage>
-                          <dockerHost>http://192.168.137.105:2375</dockerHost>
-                          <maintainer>925995041@qq.com</maintainer>
-                          <workdir>/ROOT</workdir>
-                          <cmd>["java", "-version"]</cmd>
-                          <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
-                          <dockerDirectory>${project.basedir}</dockerDirectory>
-                          <serverId>docker-registry</serverId>
-                          <registryUrl>http://192.168.137.105:5000/</registryUrl>
-                          <dockerCertPath>${project.basedir}</dockerCertPath>
-                          <resources>
-                              <resource>
-                                  <targetPath>/ROOT</targetPath>
-                                  <directory>${project.build.directory}</directory>
-                                  <include>${project.build.finalName}.jar</include>
-                              </resource>
-                          </resources>
-                      </configuration>
-                  </plugin>
-                 -->
-                <plugin>
-                         <groupId>com.spotify</groupId>
-                         <artifactId>dockerfile-maven-plugin</artifactId>
-                         <version>1.0.0</version>
-                         <configuration>
-                             <repository>${docker.image.prefix}/${project.artifactId} 
-                             </repository>
-                             <buildArgs>
-                                 <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                             </buildArgs>
-                         </configuration>
-                </plugin>
+                     <groupId>com.spotify</groupId>
+                     <artifactId>dockerfile-maven-plugin</artifactId>
+                     <version>1.3.6</version>
+                     <configuration>
+                         <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                         <buildArgs>
+                             <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                         </buildArgs>
+                     </configuration>
+                 </plugin>                 
         </plugins>
     </build>
     <distributionManagement>
