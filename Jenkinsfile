@@ -5,7 +5,7 @@
             echo "1.Prepare Stage"
             checkout scm
             pom = readMavenPom file: 'pom.xml'
-            docker_host = ""
+            docker_host = "lrf"
             img_name = "${pom.groupId}-${pom.artifactId}"
             docker_img_name = "${docker_host}/${img_name}"
 			//镜像的版本号
@@ -33,7 +33,7 @@
         }
         stage('Push') {
             echo "4.Deploy jar and Push Docker Image Stage"
-            sh "mvn deploy -Dmaven.test.skip=true"
+            //sh "mvn deploy -Dmaven.test.skip=true"
             //sh "docker login --username='admin' --password='admin'"
             //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:latest"
