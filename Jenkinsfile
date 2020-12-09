@@ -11,7 +11,7 @@
 			//镜像的版本号
 			tag = "latest"
 			//Harbor的url地址
-			nexus_url = "192.168.137.159:8081/repository/docker-hosted-repository/"
+			nexus_url = "http://192.168.137.159:8081/repository/docker-hosted-repository/"
             echo "group: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
             echo "docker-img-name: ${docker_img_name}"
             //script {
@@ -40,12 +40,17 @@
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker push lrf/dockerdemo:latest"
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
-            withCredentials([usernamePassword(credentialsId: 'nexusCard', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-                sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
-                sh "docker push ${img_name}:latest"
-                //sh "docker push ${docker_img_name}:${pom.version}"
-                //sh "docker push ${docker_img_name}:${build_tag}"
-            }
+			steps{
+				script{ 
+					withCredentials([usernamePassword(credentialsId: 'nexusCard', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
+						sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
+						sh "docker push ${img_name}:latest"
+						//sh "docker push ${docker_img_name}:${pom.version}"
+						//sh "docker push ${docker_img_name}:${build_tag}"
+					}
+				}
+			}
+
 	
         }
 
