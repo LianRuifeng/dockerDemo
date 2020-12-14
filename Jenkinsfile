@@ -25,12 +25,12 @@
         //    echo "2.Test Stage"
         //   sh "mvn test"
         //}
-        /*stage('Build') {
+        stage('Build') {
             echo "3.Build Docker Image Stage"
             //sh "mvn package  -Dmaven.test.skip=true"
             //sh "docker login --username='lrf1990' --password='ab123456789'"
             sh "mvn clean package dockerfile:build -Dmaven.test.skip=true"
-        }*/
+        }
         stage('Build and Push') {
             echo "3.build push and deploy jar and Push Docker Image Stage"
             //sh "mvn deploy -Dmaven.test.skip=true"
@@ -46,7 +46,7 @@
 						echo "dockerps ${dockerPassword}"
 						echo "nexusurl ${nexus_url}"
 						sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
-						sh "mvn clean package dockerfile:build ${nexus_url}/${img_name}:latest -Dmaven.test.skip=true"
+						
 						sh "docker tag ${img_name} ${nexus_url}/${img_name}:latest"
 						sh "docker push ${nexus_url}/${img_name}:latest"
 						//sh "docker push ${docker_img_name}:${pom.version}"
