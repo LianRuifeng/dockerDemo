@@ -55,6 +55,17 @@
 
 	
         }
+	stage('deploy') {
+		 steps {
+		     script{
+			echo "docker stop dockerdemo"
+			sh "docker stop dockerdemo"
+			echo "docker container rm dockerdemo"
+			sh "docker container rm dockerdemo -f"
+			docker run -d -p 8004:8080 --name dockerdemo ${nexus_url}/${img_name} 
+		     }
+		 }
+	}
 
 
     }
