@@ -36,7 +36,7 @@
             //sh "mvn deploy -Dmaven.test.skip=true"
             //sh "docker login --username='admin' --password='admin'"
             //echo "${env.BUILD_ID} ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
-            sh "docker tag ${img_name} ${img_name}:latest"
+           
             //sh "docker tag ${docker_img_name}:${build_tag} ${docker_img_name}:${pom.version}"
             //sh "docker push lrf/dockerdemo:latest"
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
@@ -46,7 +46,8 @@
 						echo "dockerps ${dockerPassword}"
 						echo "nexusurl ${nexus_url}"
 						sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
-						sh "docker push ${img_name}:latest"
+						sh "docker tag ${img_name} ${nexus_url}/${img_name}:latest"
+						sh "docker push ${nexus_url}/${img_name}:latest"
 						//sh "docker push ${docker_img_name}:${pom.version}"
 						//sh "docker push ${docker_img_name}:${build_tag}"
 					}
