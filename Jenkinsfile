@@ -42,7 +42,9 @@
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
 
 					withCredentials([usernamePassword(credentialsId: 'aa29cc5f-a727-451e-a4b7-95c5341ee923', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-
+						echo "dockername ${dockerUser}"
+						echo "dockerps ${dockerPassword}"
+						echo "nexusurl ${nexus_url}"
 						sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
 						sh "docker push ${img_name}:latest"
 						//sh "docker push ${docker_img_name}:${pom.version}"
