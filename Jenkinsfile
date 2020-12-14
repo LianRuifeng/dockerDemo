@@ -11,7 +11,7 @@
 			//镜像的版本号
 			tag = "latest"
 			//Harbor的url地址
-			nexus_url = "http://192.168.3.11:8081/repository/docker-hosted-repository/"
+			nexus_url = "http://192.168.3.11:5000"
             echo "group: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
             echo "docker-img-name: ${docker_img_name}"
             //script {
