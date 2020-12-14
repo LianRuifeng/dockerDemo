@@ -41,30 +41,28 @@
             //sh "docker push lrf/dockerdemo:latest"
             //sh "docker run -it -d -p 8888:8004 --name ${docker_img_name}" 
 
-					withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
-						echo "dockername ${dockerUser}"
-						echo "dockerps ${dockerPassword}"
-						echo "nexusurl ${nexus_url}"
-						sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
-						
-						sh "docker tag ${img_name} ${nexus_url}/${img_name}:latest"
-						sh "docker push ${nexus_url}/${img_name}:latest"
-						//sh "docker push ${docker_img_name}:${pom.version}"
-						//sh "docker push ${docker_img_name}:${build_tag}"
-					}
+		withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
+			echo "dockername ${dockerUser}"
+			echo "dockerps ${dockerPassword}"
+			echo "nexusurl ${nexus_url}"
+			sh "docker login -u ${dockerUser} -p ${dockerPassword} ${nexus_url}"
+
+			sh "docker tag ${img_name} ${nexus_url}/${img_name}:latest"
+			sh "docker push ${nexus_url}/${img_name}:latest"
+			//sh "docker push ${docker_img_name}:${pom.version}"
+			//sh "docker push ${docker_img_name}:${build_tag}"
+		}
 
 	
         }
 	stage('deploy') {
-		 steps {
-		     script{
-			echo "docker stop dockerdemo"
-			sh "docker stop dockerdemo"
-			echo "docker container rm dockerdemo"
-			sh "docker container rm dockerdemo -f"
-			sh "docker run -d -p 8004:8080 --name dockerdemo ${nexus_url}/${img_name}"
-		     }
-		 }
+
+		echo "docker stop dockerdemo"
+		sh "docker stop dockerdemo"
+		echo "docker container rm dockerdemo"
+		sh "docker container rm dockerdemo -f"
+		sh "docker run -d -p 8004:8080 --name dockerdemo ${nexus_url}/${img_name}"
+
 	}
 
 
